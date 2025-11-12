@@ -11,14 +11,14 @@ import { Clock, TrendingUp, ShoppingCart, Eye, ListOrdered } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 // Add these custom icon components
-const HeartIcon = ({ filled }: { filled: boolean }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+const HeartIcon = ({ filled, className }: { filled: boolean; className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill={filled ? "currentColor" : "none"} stroke={filled ? "none" : "currentColor"} />
   </svg>
 );
 
-const CopyIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+const CopyIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <rect x="9" y="9" width="12" height="12" rx="2" ry="2" />
     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
   </svg>
@@ -88,6 +88,9 @@ export default function ProductDetail() {
   if (!product) {
     return <div className="container mx-auto px-4 py-8">Product not found</div>;
   }
+
+  // Cast product to any to access dynamic properties
+  const productData: any = product;
 
   const formatDate = (timestamp: number) => {
     return new Date(timestamp).toLocaleDateString('en-US', {
@@ -204,7 +207,114 @@ export default function ProductDetail() {
             <div className="mt-6">
               <Badge className="mb-2">{product.category}</Badge>
               <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
-              <p className="text-muted-foreground">{product.description}</p>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-semibold mb-2">Description From The Seller</h3>
+                  <div className="max-w-lg">
+                    <p className="text-muted-foreground mb-2 line-clamp-3">{product.description}</p>
+                    {product.description.length > 100 && (
+                      <Button variant="link" size="sm" className="text-blue-600 hover:text-blue-800">
+                        Show more
+                      </Button>
+                    )}
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="font-semibold mb-4">Details</h3>
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    {product.category === 'Handbag' && (
+                      <>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Era</span>
+                          <span>{productData.era}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Brand</span>
+                          <span>{productData.brand}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Number of Items</span>
+                          <span>{productData.numberOfItems}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Colour</span>
+                          <span>{productData.colour}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Material</span>
+                          <span>{productData.material}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Condition</span>
+                          <span>{productData.condition}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Size</span>
+                          <span>{productData.size}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Height (cm)</span>
+                          <span>{productData.height}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Width (cm)</span>
+                          <span>{productData.width}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Depth (cm)</span>
+                          <span>{productData.depth}</span>
+                        </div>
+                      </>
+                    )}
+                    
+                    {product.category === 'Shoe' && (
+                      <>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Era</span>
+                          <span>{productData.shoeEra}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Brand</span>
+                          <span>{productData.shoeBrand}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Size</span>
+                          <span>{productData.shoeSize}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">New in Box</span>
+                          <span>{productData.shoeNewInBox}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Colour</span>
+                          <span>{productData.shoeColour}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Gender</span>
+                          <span>{productData.shoeGender}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Material</span>
+                          <span>{productData.shoeMaterial}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Vintage</span>
+                          <span>{productData.shoeVintage}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Condition</span>
+                          <span>{productData.shoeCondition}</span>
+                        </div>
+                        <div className="flex justify-between py-1 border-b">
+                          <span className="text-muted-foreground uppercase">Made In</span>
+                          <span>{productData.shoeMadeIn}</span>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 

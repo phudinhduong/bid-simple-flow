@@ -125,13 +125,223 @@ export default function CreateProduct() {
                 </div>
                 <div>
                   <Label htmlFor="category">Category</Label>
-                  <Input
-                    id="category"
-                    value={formData.category}
-                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    placeholder="e.g., Electronics, Fashion"
-                  />
+                  <div className="grid grid-cols-2 gap-4 mt-2">
+                    <Button
+                      variant={formData.category === 'Handbag' ? 'default' : 'outline'}
+                      onClick={() => setFormData({ ...formData, category: 'Handbag' })}
+                      className="py-6"
+                    >
+                      Handbag
+                    </Button>
+                    <Button
+                      variant={formData.category === 'Shoe' ? 'default' : 'outline'}
+                      onClick={() => setFormData({ ...formData, category: 'Shoe' })}
+                      className="py-6"
+                    >
+                      Shoe
+                    </Button>
+                  </div>
                 </div>
+                
+                {formData.category === 'Handbag' && (
+                  <div className="space-y-4 p-4 border rounded-lg">
+                    <h3 className="font-medium">Handbag Details</h3>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="era">Era</Label>
+                        <Input
+                          id="era"
+                          value={formData.era}
+                          onChange={(e) => setFormData({ ...formData, era: e.target.value })}
+                          placeholder="e.g., Vintage, Modern"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="brand">Brand</Label>
+                        <Input
+                          id="brand"
+                          value={formData.brand}
+                          onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
+                          placeholder="e.g., Gucci, Louis Vuitton"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="numberOfItems">Number of Items</Label>
+                        <Input
+                          id="numberOfItems"
+                          value={formData.numberOfItems}
+                          onChange={(e) => setFormData({ ...formData, numberOfItems: e.target.value })}
+                          placeholder="e.g., 1, 2, Set"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="colour">Colour</Label>
+                        <Input
+                          id="colour"
+                          value={formData.colour}
+                          onChange={(e) => setFormData({ ...formData, colour: e.target.value })}
+                          placeholder="e.g., Black, Brown"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="material">Material</Label>
+                        <Input
+                          id="material"
+                          value={formData.material}
+                          onChange={(e) => setFormData({ ...formData, material: e.target.value })}
+                          placeholder="e.g., Leather, Canvas"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="condition">Condition</Label>
+                        <Input
+                          id="condition"
+                          value={formData.condition}
+                          onChange={(e) => setFormData({ ...formData, condition: e.target.value })}
+                          placeholder="e.g., Excellent, Good"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="size">Size</Label>
+                        <Input
+                          id="size"
+                          value={formData.size}
+                          onChange={(e) => setFormData({ ...formData, size: e.target.value })}
+                          placeholder="e.g., Small, Medium"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="height">Height (cm)</Label>
+                        <Input
+                          id="height"
+                          type="number"
+                          value={formData.height}
+                          onChange={(e) => setFormData({ ...formData, height: e.target.value })}
+                          placeholder="e.g., 25"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="width">Width (cm)</Label>
+                        <Input
+                          id="width"
+                          type="number"
+                          value={formData.width}
+                          onChange={(e) => setFormData({ ...formData, width: e.target.value })}
+                          placeholder="e.g., 30"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="depth">Depth (cm)</Label>
+                        <Input
+                          id="depth"
+                          type="number"
+                          value={formData.depth}
+                          onChange={(e) => setFormData({ ...formData, depth: e.target.value })}
+                          placeholder="e.g., 15"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {formData.category === 'Shoe' && (
+                  <div className="space-y-4 p-4 border rounded-lg">
+                    <h3 className="font-medium">Shoe Details</h3>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="shoeEra">Era</Label>
+                        <Input
+                          id="shoeEra"
+                          value={formData.shoeEra}
+                          onChange={(e) => setFormData({ ...formData, shoeEra: e.target.value })}
+                          placeholder="e.g., Vintage, Modern"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="shoeBrand">Brand</Label>
+                        <Input
+                          id="shoeBrand"
+                          value={formData.shoeBrand}
+                          onChange={(e) => setFormData({ ...formData, shoeBrand: e.target.value })}
+                          placeholder="e.g., Nike, Adidas"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="shoeSize">Size</Label>
+                        <Input
+                          id="shoeSize"
+                          value={formData.shoeSize}
+                          onChange={(e) => setFormData({ ...formData, shoeSize: e.target.value })}
+                          placeholder="e.g., US 8, EU 42"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="shoeNewInBox">New in Box</Label>
+                        <Input
+                          id="shoeNewInBox"
+                          value={formData.shoeNewInBox}
+                          onChange={(e) => setFormData({ ...formData, shoeNewInBox: e.target.value })}
+                          placeholder="Yes/No"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="shoeColour">Colour</Label>
+                        <Input
+                          id="shoeColour"
+                          value={formData.shoeColour}
+                          onChange={(e) => setFormData({ ...formData, shoeColour: e.target.value })}
+                          placeholder="e.g., Black, White"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="shoeGender">Gender</Label>
+                        <Input
+                          id="shoeGender"
+                          value={formData.shoeGender}
+                          onChange={(e) => setFormData({ ...formData, shoeGender: e.target.value })}
+                          placeholder="e.g., Men, Women, Unisex"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="shoeMaterial">Material</Label>
+                        <Input
+                          id="shoeMaterial"
+                          value={formData.shoeMaterial}
+                          onChange={(e) => setFormData({ ...formData, shoeMaterial: e.target.value })}
+                          placeholder="e.g., Leather, Canvas"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="shoeVintage">Vintage</Label>
+                        <Input
+                          id="shoeVintage"
+                          value={formData.shoeVintage}
+                          onChange={(e) => setFormData({ ...formData, shoeVintage: e.target.value })}
+                          placeholder="Yes/No"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="shoeCondition">Condition</Label>
+                        <Input
+                          id="shoeCondition"
+                          value={formData.shoeCondition}
+                          onChange={(e) => setFormData({ ...formData, shoeCondition: e.target.value })}
+                          placeholder="e.g., Excellent, Good"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="shoeMadeIn">Made In</Label>
+                        <Input
+                          id="shoeMadeIn"
+                          value={formData.shoeMadeIn}
+                          onChange={(e) => setFormData({ ...formData, shoeMadeIn: e.target.value })}
+                          placeholder="e.g., Italy, USA"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 <div>
                   <Label>Product Images</Label>
                   <div className="mt-2">
